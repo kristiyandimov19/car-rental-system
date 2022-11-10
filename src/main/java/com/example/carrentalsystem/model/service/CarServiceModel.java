@@ -6,16 +6,7 @@ public class CarServiceModel {
     private String model;
     private int horsePower;
     private int yearCreated;
-    private boolean available;
 
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public CarServiceModel setAvailable(boolean available) {
-        this.available = available;
-        return this;
-    }
 
     public String getBrand() {
         return brand;
@@ -60,7 +51,6 @@ public class CarServiceModel {
                 ", model='" + model + '\'' +
                 ", horsePower=" + horsePower +
                 ", yearCreated=" + yearCreated +
-                ", available=" + available +
                 '}';
     }
 }

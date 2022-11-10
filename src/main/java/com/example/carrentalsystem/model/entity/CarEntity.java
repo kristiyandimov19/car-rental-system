@@ -14,10 +14,8 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "car")
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 public class CarEntity extends BaseEntity {
 
     @Column(name = "brand", nullable = false)
@@ -34,6 +32,51 @@ public class CarEntity extends BaseEntity {
     @Column(name = "year_created")
     @Min(1800)
     private int yearCreated;
-    @Column()
+    @Column(name = "available", columnDefinition = "boolean default true")
     private boolean available = true;
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public CarEntity setBrand(String brand) {
+        this.brand = brand;
+        return this;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public CarEntity setModel(String model) {
+        this.model = model;
+        return this;
+    }
+
+    public int getHorsePower() {
+        return horsePower;
+    }
+
+    public CarEntity setHorsePower(int horsePower) {
+        this.horsePower = horsePower;
+        return this;
+    }
+
+    public int getYearCreated() {
+        return yearCreated;
+    }
+
+    public CarEntity setYearCreated(int yearCreated) {
+        this.yearCreated = yearCreated;
+        return this;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public CarEntity setAvailable(boolean available) {
+        this.available = available;
+        return this;
+    }
 }

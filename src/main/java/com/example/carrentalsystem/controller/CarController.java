@@ -1,6 +1,7 @@
 package com.example.carrentalsystem.controller;
 
 import com.example.carrentalsystem.model.service.CarServiceModel;
+import com.example.carrentalsystem.model.view.CarAvailabilityModel;
 import com.example.carrentalsystem.model.view.CarViewModel;
 import com.example.carrentalsystem.service.CarService;
 import org.modelmapper.ModelMapper;
@@ -43,6 +44,17 @@ public class CarController {
         carService.editCar(id, carViewModel);
 
         return carViewModel.toString();
+    }
+
+    @PutMapping("rent/{id}")
+    public String rentCar(@PathVariable Integer id) {
+
+        if (carService.findById(id).isAvailable()) {
+            carService.changeAvailability(id);
+            return "Successfully rented";
+        } else {
+            return "Car is unavailable";
+        }
     }
 
 }

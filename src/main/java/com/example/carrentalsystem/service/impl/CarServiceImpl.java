@@ -2,6 +2,7 @@ package com.example.carrentalsystem.service.impl;
 
 import com.example.carrentalsystem.model.entity.CarEntity;
 import com.example.carrentalsystem.model.service.CarServiceModel;
+import com.example.carrentalsystem.model.view.CarAvailabilityModel;
 import com.example.carrentalsystem.model.view.CarViewModel;
 import com.example.carrentalsystem.repository.CarRepository;
 import com.example.carrentalsystem.service.CarService;
@@ -25,19 +26,16 @@ public class CarServiceImpl implements CarService {
     @Override
     public void seedCars() {
 
-        CarEntity carEntity = CarEntity.builder()
-                .brand("Mercedes")
-                .model("Benz")
-                .horsePower(300)
-                .yearCreated(2017)
-                .build();
-
-        CarEntity carEntity2 = CarEntity.builder()
-                .brand("BMW")
-                .model("X5 xDrive")
-                .horsePower(320)
-                .yearCreated(2015)
-                .build();
+        CarEntity carEntity = new CarEntity()
+                .setBrand("Mercedes")
+                .setModel("Benz")
+                .setHorsePower(300)
+                .setYearCreated(2017);
+        CarEntity carEntity2 = new CarEntity()
+                .setBrand("BMW")
+                .setModel("X5 xDrive")
+                .setHorsePower(320)
+                .setYearCreated(2015);
 
         carRepository.saveAll(List.of(carEntity, carEntity2));
     }
@@ -50,8 +48,12 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public CarViewModel findById(Integer id) {
-        return modelMapper.map(carRepository.findById(id), CarViewModel.class);
+    public void changeAvailability(Integer id) {
+        CarEntity car = carRepository.findById(id).orElse(null);
+
+        car.setAvailable(false);
+
+        carRepository.save(car);
     }
 
     @Override
@@ -75,5 +77,10 @@ public class CarServiceImpl implements CarService {
         car.setYearCreated(carViewModel.getYearCreated());
 
         carRepository.save(car);
+    }
+
+    @Override
+    public CarAvailabilityModel findById(Integer id) {
+        return modelMapper.map(carRepository.findById(id).orElse(null), CarAvailabilityModel.class);
     }
 }

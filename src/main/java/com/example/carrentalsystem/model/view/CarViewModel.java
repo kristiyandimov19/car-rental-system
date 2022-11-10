@@ -62,4 +62,16 @@ public class CarViewModel {
         this.yearCreated = yearCreated;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "CarViewModel{" +
+                "id=" + id +
+                ", brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", horsePower=" + horsePower +
+                ", yearCreated=" + yearCreated +
+                ", available=" + available +
+                '}';
+    }
 }
